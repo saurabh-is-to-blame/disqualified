@@ -26,20 +26,37 @@
 </head>
 <body>
 	<div id="qrcode"></div>
-<script type="text/javascript">
-function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,b)}
-var id = b()
-new QRCode(document.getElementById("qrcode"), id);
-var client  = mqtt.connect("ws://saurabhk.housing.com:8083/mqtt");
-client.subscribe('/'+id+'/fetch');
-client.publish('/'+id+'/init', 'Hello Saurabh');
-client.on('message', function (topic, message) {
-  	//alert(message.toString());
-  	client.end();
-	});
+  <div id="test"></div>
 
+  <script type="text/javascript">
+    function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,b)}
+    var id = b()
+    new QRCode(document.getElementById("qrcode"), id);
+    var client  = mqtt.connect("ws://saurabhk.housing.com:8083/mqtt");
+    client.subscribe('/'+id+'/fetch');
+    client.publish('/'+id+'/init', 'Hello Saurabh');
+    client.on('message', function (topic, message) {
+      for (var i = message.length - 1; i >= 0; i--) {
+        if (message[i]%2 == 0) {
+          image_id = Math.floor((Math.random() * 11) + 1);
+          can_fly(image_id)
+        }
+        else{
+          image_id = Math.floor((Math.random() * 8) + 1);
+          cant_fly(image_id)
+        };
+      };
+      	client.end();
+    	});
 
-</script>
+    function can_fly (udd_id) {
+      
+    }
+
+    function cant_fly (not_udd_id) {
+
+    }
+  </script>
 
 
 </body>
