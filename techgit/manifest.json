@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Github Terminal",
+  "description": "This extension is to spawn terminal at your Github repository",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
