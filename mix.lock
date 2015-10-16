@@ -4,4 +4,5 @@
   "gen_logger": {:git, "git://github.com/emqtt/gen_logger.git", "eced518f1dea167bebd576bb8b1cccb764a45739", [branch: "master"]},
   "getopt": {:git, "https://github.com/jcomellas/getopt.git", "626698975e63866156159661d100785d65eab6f9", [branch: "master"]},
   "goldrush": {:git, "git://github.com/DeadZen/goldrush.git", "64864ba7fcf40988361340e48680b49a2c2938cf", [tag: "0.1.7"]},
+  "json": {:hex, :json, "0.3.2"},
   "lager": {:git, "git://github.com/basho/lager.git", "e82bb13efa32a0de747d7dc0e8c567794965cec2", [branch: "master"]}}
