@@ -1,0 +1,46 @@
+<html>
+<head>
+  <title>test Ws mqtt.js</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="./browserMqtt.js"></script>
+ <script src="./davidshimjs-qrcodejs-540308a/qrcode.min.js"></script>
+<script>
+
+ 
+// $(window).bind('beforeunload',function(){
+// 	//return 'are you sure you want to leave?';
+// 	//publish to mqtt
+	
+// 		client.subscribe('presence');
+//   	client.publish('presence', 'Hello mqtt');
+	
+// 	client.on('message', function (topic, message) {
+//   	// message is Buffer
+//   	console.log(message.toString());
+//   	client.end();
+// 	});
+// });
+
+</script>
+
+</head>
+<body>
+	<div id="qrcode"></div>
+<script type="text/javascript">
+function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,b)}
+var id = b()
+new QRCode(document.getElementById("qrcode"), id);
+var client  = mqtt.connect("ws://saurabhk.housing.com:8083/mqtt");
+client.subscribe('/'+id+'/fetch');
+client.publish('/'+id+'/init', 'Hello Saurabh');
+client.on('message', function (topic, message) {
+  	//alert(message.toString());
+  	client.end();
+	});
+
+
+</script>
+
+
+</body>
+</html>
