@@ -33,8 +33,8 @@
     var id = b()
     new QRCode(document.getElementById("qrcode"), id);
     var client  = mqtt.connect("ws://saurabhk.housing.com:8083/mqtt");
-    client.subscribe('/'+id+'/fetch');
-    client.publish('/'+id+'/init', 'Hello Saurabh');
+    client.subscribe('/'+id+'/chat/fetch');
+    client.publish('/chat/'+id+'/init', 'Hello Saurabh', 1);
     client.on('message', function (topic, message) {
       for (var i = message.length - 1; i >= 0; i--) {
         if (message[i]%2 == 0) {
