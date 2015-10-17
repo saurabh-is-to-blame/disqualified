@@ -22,11 +22,64 @@
 // });
 
 </script>
+<style type="text/css">
+#imglist {
+width: 200px;
+margin: auto;
+}
+#imglist img {
+display: none;
+}
+#imglist img.scaleup {
+display: block;
+position: absolute;
+height: 150px;
+-webkit-animation: popup 1s linear;
+animation: popup 1s linear;
+}
 
+@-webkit-keyframes popup {
+0% { bottom: -150px; }
+20% { bottom: 30%; transform: scale(1.5); }
+30% { bottom: 40%; transform: scale(2); }
+60% { bottom: 50%; transform: scale(2.2); }
+90% { bottom: 90%; transform: scale(1); }
+100% { bottom: 100%; transform: scale(0.5); }
+}
+@keyframes popup {
+0% { bottom: -150px; }
+20% { bottom: 30%; transform: scale(1.5); }
+30% { bottom: 40%; transform: scale(2); }
+60% { bottom: 50%; transform: scale(2.2); }
+90% { bottom: 90%; transform: scale(1); }
+100% { bottom: 100%; transform: scale(0.5); }
+}
+</style>
 </head>
 <body>
 	<div id="qrcode"></div>
-  <div id="test"></div>
+  <div id="imglist">
+    <span id="div1">
+      <img class="1" src="images/Fly/1.jpg">
+      <img class="2" src="images/Fly/2.png">
+      <img class="3" src="images/Fly/3.jpg">
+      <img class="4" src="images/Fly/4.jpg">
+      <img class="5" src="images/Fly/5.jpg">
+      <img class="6" src="images/Fly/6.jpg">
+      <img class="7" src="images/Fly/7.png">
+      <img class="8" src="images/Fly/8.jpg">
+    </span>
+    <span id="div2">
+      <img class="1" src="images/NoFly/1.jpg">
+      <img class="2" src="images/NoFly/2.gif">
+      <img class="3" src="images/NoFly/3.jpg">
+      <img class="4" src="images/NoFly/4.png">
+      <img class="5" src="images/NoFly/5.png">
+      <img class="6" src="images/NoFly/6.jpg">
+      <img class="7" src="images/NoFly/7.jpg">
+      <img class="8" src="images/NoFly/8.jpg">
+    </span>
+  </div>
 
   <script type="text/javascript">
     function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,b)}
@@ -36,25 +89,67 @@
     client.subscribe('/'+id+'/chat/fetch');
     client.publish('/chat/'+id+'/init', 'Hello Saurabh', 1);
     client.on('message', function (topic, message) {
-      for (var i = message.length - 1; i >= 0; i--) {
-        if (message[i]%2 == 0) {
-          image_id = Math.floor((Math.random() * 11) + 1);
-          can_fly(image_id)
-        }
-        else{
-          image_id = Math.floor((Math.random() * 8) + 1);
-          cant_fly(image_id)
-        };
-      };
-      	client.end();
-    	});
+      message = JSON.parse(message.toString());
+      render_image(message);
+      client.end();
+    });
 
-    function can_fly (udd_id) {
+    function render_image(message) {
+      //console.log(message)
+      //alert('aman1')
+      //var i = message.length
+      call_fly_method(message, message.length-30)
+      
       
     }
 
-    function cant_fly (not_udd_id) {
+    function call_fly_method(message, i, prev_img_id){
+        if(i < 0) {
+          round_end(i)
+          return;
+        };
+        //alert(message+i)
+        if (message[i]%2 == 0) {
+            image_id = rand(prev_img_id);
+            can_fly(image_id)
 
+          }
+          else{
+            image_id = rand(prev_img_id);
+            cant_fly(image_id);
+          };
+          window.setTimeout(function(){
+            // console.log(i);
+            call_fly_method(message, --i, image_id);
+          }, 800);
+    }
+
+    
+    function can_fly (udd_id) {
+      // console.log(udd_id)
+      $('#div1 img').removeClass("scaleup");
+      $('#div2 img').removeClass("scaleup");
+      $('#div1 img.' + udd_id).addClass("scaleup");
+    }
+
+    function cant_fly (not_udd_id) {
+      // console.log(not_udd_id)
+      $('#div2 img').removeClass("scaleup");
+      $('#div1 img').removeClass("scaleup");
+      $('#div2 img.' + not_udd_id).addClass("scaleup");
+    }
+
+    function round_end (image) {
+      $('#div2 img').removeClass("scaleup");
+      $('#div1 img').removeClass("scaleup");
+    }
+
+    function rand (image_id) {
+      new_image_id = Math.floor((Math.random() * 8) + 1);
+      if (new_image_id == image_id) {
+        new_image_id = 9 - image_id
+      };
+      return new_image_id;
     }
   </script>
 
