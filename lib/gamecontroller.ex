@@ -11,6 +11,7 @@ defmodule Disqualified.GameController do
     :ok = Mqtt.subscribe(client, "/chat/+/init", 1)
     :ok = Mqtt.subscribe(client, "/chat/+/register", 1)
     :ok = Mqtt.subscribe(client, "/chat/+/results", 1)
+    :ok = Mqtt.subscribe(client, "/chat/+/ready", 1)
     {:ok, %{client: client}}
   end
 
@@ -40,23 +41,24 @@ defmodule Disqualified.GameController do
       "init" ->
         Logger.debug "Game started. Game Id: " <> game_id
         publish_random(client, game_id)
+      "register" ->
+        Logger.debug "New Registration: " <> payload
+      "ready" ->
+        Mqtt.publish(client, "/" <> game_id <> "/chat/start",
+                     "Please start.", 1)
       _ ->
-        Logger.debug "Unknown message"
+        Logger.debug "Unknown message:" <> channel <> ": " <> payload
     end
   end
 
   def publish_random(client, game_id) do
     :random.seed :erlang.now
-    list = Stream.repeatedly(&:random.uniform/0)
-    |> Enum.take(50)
+    list = Stream.repeatedly(fn -> :random.uniform end)
+    |> Enum.take(5)
 
     {:ok, numbers} =
-      Enum.map(list, fn(x) -> convert_to_integer(x) end)
+      Enum.map(list, fn(x) -> round(x*2) end)
     |> JSON.encode
     Mqtt.publish(client, "/" <> game_id <> "/chat/fetch", numbers, 1)
-  end
-
-  defp convert_to_integer(x) do
-    round(x*2)
   end
 end
