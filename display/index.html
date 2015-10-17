@@ -81,6 +81,12 @@ animation-delay: 200ms;
     </span>
   </div>
 
+  <div id="audio"></div>
+  <audio id="player" controls="controls" style="display:none">
+    <source id="mp3_src" src="audio/fly/1.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
   <script type="text/javascript">
     function getUrlVars() {
 			var vars = {};
@@ -131,6 +137,19 @@ animation-delay: 200ms;
       
     }
 
+    function change_audio(fly, image_id) {
+      var audio = $("#player");
+      if (fly) {src = "audio/fly/"+image_id+".mp3"} else{src = "audio/no_fly/"+image_id+".mp3"};
+      $("#mp3_src").attr("src", src);
+      /****************/
+      audio[0].pause();
+      audio[0].load();//suspends and restores all audio element
+
+      //audio[0].play(); changed based on Sprachprofi's comment below
+      audio[0].oncanplaythrough = audio[0].play();
+      /****************/
+    }
+
     function call_fly_method(message, i, prev_img_id){
         if(i >= message.length) {
           round_end(i)
@@ -140,16 +159,18 @@ animation-delay: 200ms;
        	$("#count").html(i+1+" : "+ message[i]%2 )
         if (message[i]%2 == 0) {
             image_id = rand(prev_img_id);
-            can_fly(image_id)
+            change_audio(true, image_id);
+            can_fly(image_id);
           }
           else{
             image_id = rand(prev_img_id);
+            change_audio(false, image_id);
             cant_fly(image_id);
           };
           window.setTimeout(function(){
             // console.log(i);
             call_fly_method(message, ++i, image_id);
-          }, 3000);
+          }, 1000);
     }
     
     function can_fly (udd_id) {
