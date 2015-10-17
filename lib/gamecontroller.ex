@@ -46,6 +46,8 @@ defmodule Disqualified.GameController do
       "ready" ->
         Mqtt.publish(client, "/" <> game_id <> "/chat/start",
                      "Please start.", 1)
+      "result" ->
+        Logger.debug "Result:" <> payload
       _ ->
         Logger.debug "Unknown message:" <> channel <> ": " <> payload
     end
