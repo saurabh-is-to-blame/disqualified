@@ -89,8 +89,8 @@ animation: popup 1s linear;
     client.subscribe('/'+id+'/chat/fetch');
     client.publish('/chat/'+id+'/init', 'Hello Saurabh', 1);
     client.on('message', function (topic, message) {
-      message = JSON.parse(message.toString())
-      render_image(message)
+      message = JSON.parse(message.toString());
+      render_image(message);
       client.end();
     });
 
@@ -98,44 +98,58 @@ animation: popup 1s linear;
       //console.log(message)
       //alert('aman1')
       //var i = message.length
-      call_fly_method(message, message.length-1)
+      call_fly_method(message, message.length-30)
       
       
     }
 
-    function call_fly_method(message, i){
+    function call_fly_method(message, i, prev_img_id){
         if(i < 0) {
+          round_end(i)
           return;
         };
         //alert(message+i)
         if (message[i]%2 == 0) {
-            image_id = Math.floor((Math.random() * 8) + 1);
+            image_id = rand(prev_img_id);
             can_fly(image_id)
 
           }
           else{
-            image_id = Math.floor((Math.random() * 8) + 1);
+            image_id = rand(prev_img_id);
             cant_fly(image_id);
           };
           window.setTimeout(function(){
-            console.log('here');
-            call_fly_method(message, --i);
-          }, 1000);
+            // console.log(i);
+            call_fly_method(message, --i, image_id);
+          }, 800);
     }
 
     
     function can_fly (udd_id) {
-      //console.log(udd_id)
+      // console.log(udd_id)
       $('#div1 img').removeClass("scaleup");
-      $('#div1 img.' + udd_id).addClass("scaleup");
       $('#div2 img').removeClass("scaleup");
+      $('#div1 img.' + udd_id).addClass("scaleup");
     }
 
     function cant_fly (not_udd_id) {
-      //console.log(not_udd_id)
+      // console.log(not_udd_id)
       $('#div2 img').removeClass("scaleup");
-      $('#div2 img.' + not_udd_id).addClass("scaleup");
       $('#div1 img').removeClass("scaleup");
+      $('#div2 img.' + not_udd_id).addClass("scaleup");
+    }
+
+    function round_end (image) {
+      $('#div2 img').removeClass("scaleup");
+      $('#div1 img').removeClass("scaleup");
+    }
+
+    function rand (image_id) {
+      new_image_id = Math.floor((Math.random() * 8) + 1);
+      if (new_image_id == image_id) {
+        new_image_id = 9 - image_id
+      };
+      return new_image_id;
     }
   </script>
 
