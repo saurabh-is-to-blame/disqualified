@@ -13,20 +13,19 @@ defmodule Mqtt do
     ])
   end
 
-  def subscribe(client,topic,qos) do
+  def subscribe(client, topic, qos) do
     :emqttc.subscribe(client, topic,qos)
   end
 
-  def publish(client,topic,message) do
+  def publish(client, topic, message) do
     :emqttc.publish(client, topic, message)
   end
 
-  def publish(client,topic,message,qos) do
+  def publish(client, topic, message, qos) do
     :emqttc.publish(client, topic, message,[{:qos,qos}])
   end
 
   def disconnect(client) do
     :emqttc.disconnect(client)
   end
-
 end

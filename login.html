@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+        <link href='https://fonts.googleapis.com/css?family=Cantarell:400,700' rel='stylesheet' type='text/css'>
+            <style type="text/css">
+        body {
+                    font-family: 'Cantarell', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 14px;
+                }
+                        #login {
+                                    margin: 100px auto;
+                                    box-shadow: 0px 1px 3px #ccc;
+                                    padding: 20px;
+                                    width: 100%;
+                                    max-width: 500px;
+                                    min-height: 200px;
+                                    background: #fafafa;
+                                    display: flex;
+                                    z-index: 1000;
+                                }
+                                        .adjbox {
+                                                    width: 50%;
+                                                }
+                                                        .qrc {
+                                                                    max-width: 220px;
+                                                                }
+                                                                        .btn {
+                                                                                    border: 1px solid #7323dc;
+                                                                                    text-decoration: none;
+                                                                                    color: #7323dc;
+                                                                                    padding: 8px 20px;
+                                                                                    border-radius: 3px;
+                                                                                    transition: all 500ms ease;
+                                                                                    display: inline-block;
+                                                                                }
+                                                                                        .btn:hover {
+                                                                                                    background: #7323dc;
+                                                                                                    color: #fff;
+                                                                                                }
+                                                                                                        #imglist img {
+                                                                                                                    position: absolute;
+                                                                                                                    display: none;
+                                                                                                                    width: 50px;
+                                                                                                                }
+                                                                                                                        #imglist .imglpop {
+                                                                                                                                    display: block;
+                                                                                                                                    -webkit-animation: popup 2s linear;
+                                                                                                                                    animation: popup 2s linear;
+                                                                                                                                }
+                                                                                                                                        #imglist .imgr {
+                                                                                                                                                    -webkit-animation: popupr 2s linear;
+                                                                                                                                                    animation: popupr 2s linear;
+                                                                                                                                                }
+                                                                                                                                                            @keyframes popup {
+                                                                                                                                                                            0% { left: 0; bottom: -150px;  }
+                                                                                                                                                                            20% { left: 5%; bottom: 10%; transform: scale(1.1);  }
+                                                                                                                                                                            40% { left: 10%; bottom: 50%; transform: scale(1.2);  }
+                                                                                                                                                                            55% { left: 15%; bottom: 60%; transform: scale(1.3);  }
+                                                                                                                                                                            80% { left: 20%; bottom: 50%; transform: scale(0.8);  }
+                                                                                                                                                                            90% { left: 25%; bottom: 10%; transform: scale(0.5);  }
+                                                                                                                                                                            100% { left: 30%; bottom: -150px; transform: scale(0.2);  }
+                                                                                                                                                                        }
+
+                                                                                                                                                                                }
+                                                                                                                                                                                    </style>
+                                                                                                                                                                                    </head>
+                                                                                                                                                                                    <body>
+                                                                                                                                                                                        <div id="login">
+                                                                                                                                                                                                    <div id="qr" class="adjbox">
+                                                                                                                                                                                                                    <img class="qrc" src="http://i.imgur.com/IjlycbS.png">
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                    <div id="info" class="adjbox">
+                                                                                                                                                                                                                                                    <h2>Chidia Udd</h2>
+                                                                                                                                                                                                                                                                <p>Chidia udd is a game where you play with your friends and slap them in the face if they lose. When you win you get boiled potatoes.</p>
+                                                                                                                                                                                                                                                                            <a class="btn purple" href="#">Start!</a>
+                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                                                                                                            <div id="imglist">
+                                                                                                                                                                                                                                                                                                        <span class="imgl">
+                                                                                                                                                                                                                                                                                                                        <img src="http://s3.amazonaws.com/theoatmeal-img/default/gbf.png" />
+                                                                                                                                                                                                                                                                                                                                    <img src="http://41.media.tumblr.com/257bd19e4e08f73db001a49a732c3592/tumblr_nj16p7cyFS1u9fsu8o1_1280.png" />
+                                                                                                                                                                                                                                                                                                                                                <img src="http://www.zombiedream.co.uk/wp-content/uploads/2014/07/free-kawaii-barnyard-animal-icons-pig.jpg" />
+                                                                                                                                                                                                                                                                                                                                                            <img src="https://classconnection.s3.amazonaws.com/184/flashcards/1877184/jpg/chibi-cow1355787780475.jpg" />
+                                                                                                                                                                                                                                                                                                                                                                    </span>
+                                                                                                                                                                                                                                                                                                                                                                            <img src="http://pre00.deviantart.net/d592/th/pre/i/2010/228/0/f/banana_bat_by_roukara.jpg" />
+                                                                                                                                                                                                                                                                                                                                                                                    <img src="http://orig10.deviantart.net/db51/f/2009/252/3/c/__charizard__006___by_pokechibiartist98.png" />
+                                                                                                                                                                                                                                                                                                                                                                                        </div>
+
+
+                                                                                                                                                                                                                                                                                                                                                                                            <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                <script type='text/javascript'>//<![CDATA[
+        $(window).on('load', function() {
+                    setRandomClass();
+                            setInterval(function () {
+                                        setRandomClass();
+                                                }, 1900);
+                                    function setRandomClass() {
+                                                var imglist = $("#imglist .imgl");
+                                                            var items = imglist.find("img");
+                                                                        var number = items.length;
+                                                                                    var random = Math.floor((Math.random() * number));
+                                                                                                items.removeClass("imglpop");
+                                                                                                            items.eq(random).addClass("imglpop");
+                                                                                                                    }
+                                                                                                                            });//]]>
+    </script>
+    </body>
+    </html>:q
+    :
